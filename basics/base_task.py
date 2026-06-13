@@ -346,7 +346,7 @@ class BaseTask(pl.LightningModule):
             num_workers=hparams['ds_workers'],
             prefetch_factor=hparams['dataloader_prefetch_factor'],
             pin_memory=True,
-            persistent_workers=True
+            persistent_workers=False # Setting this to False appears to prevent a significant memory leak
         )
 
     def val_dataloader(self):
@@ -367,7 +367,7 @@ class BaseTask(pl.LightningModule):
             batch_sampler=sampler,
             num_workers=hparams['ds_workers'],
             prefetch_factor=hparams['dataloader_prefetch_factor'],
-            persistent_workers=True
+            persistent_workers=False
         )
 
     def test_dataloader(self):
